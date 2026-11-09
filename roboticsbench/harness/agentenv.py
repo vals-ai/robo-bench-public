@@ -27,7 +27,8 @@ def agent_python_bin() -> str | None:
     try:
         VENV.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run([uv, "venv", "--quiet", "--python", "3.12", str(VENV)], check=True, timeout=600)
-        subprocess.run([uv, "pip", "install", "--quiet", "--python", str(py), *PACKAGES], check=True, timeout=1200)
+        subprocess.run([uv, "pip", "install", "--quiet", "--exclude-newer", "7 days", "--python", str(py), *PACKAGES],
+                       check=True, timeout=1200)
         marker.write_text("ok\n")
     except (subprocess.SubprocessError, OSError):
         return None

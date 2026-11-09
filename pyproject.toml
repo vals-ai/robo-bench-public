@@ -30,3 +30,8 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["roboticsbench"]
+
+[tool.uv]
+# package aging: only resolve releases at least 7 days old (relative spans need uv >= 0.9.17)
+required-version = ">=0.9.17"
+exclude-newer = "7 days"
